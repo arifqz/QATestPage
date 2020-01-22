@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en" style="position:relative">
+<head>
+    <meta charset="UTF-8">
+    <title>Celtra test pages</title>
+    <meta name='viewport' content='initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'></head>
+
+<body>
+
+
+
+    <!-- Ensures Universal Tags treat this page as a web environment -->
+    <!-- After merging https://celtra.atlassian.net/browse/MAB-8501 to master, Universal Tags treat page as a web environment if -->
+    <!-- page has more than 5 anchors or more than 15 characters of inline text before tag. -->
+    <a href="http://www.celtra.com" style="display: none;">Celtra</a>
+    <a href="http://www.celtra.com" style="display: none;">Celtra</a>
+    <a href="http://www.celtra.com" style="display: none;">Celtra</a>
+    <a href="http://www.celtra.com" style="display: none;">Celtra</a>
+    <a href="http://www.celtra.com" style="display: none;">Celtra</a>
+    <a href="http://www.celtra.com" style="display: none;">Celtra</a>
+    <link rel="stylesheet" href="node_modules/video.js/dist/video-js.min.css" />
+    <link rel="stylesheet" href="node_modules/videojs-contrib-ads/dist/videojs.ads.css" />
+    <link rel="stylesheet" href="node_modules/videojs-ima/dist/videojs.ima.css" />
+
+
+    <h2>Test page</h2>
+
+    <div>
+        Code: <textarea name="code" style="width:100%;height:22em;">&lt;div class=&quot;celtra-ad-v3&quot;&gt;
+    &lt;img src=&quot;data:image/png,celtra&quot; style=&quot;display: none&quot; onerror=&quot;
+        (function(img) {
+            var params = {'clickUrl':'','expandDirection':'undefined','preferredClickThroughWindow':'new','clickEvent':'advertiser','externalAdServer':'Custom','tagVersion':'6'};
+            var req = document.createElement('script');
+            req.id = params.scriptId = 'celtra-script-' + (window.celtraScriptIndex = (window.celtraScriptIndex||0)+1);
+            params.clientTimestamp = new Date/1000;
+            params.clientTimeZoneOffsetInMinutes = new Date().getTimezoneOffset();
+            params.hostPageLoadId=window.celtraHostPageLoadId=window.celtraHostPageLoadId||(Math.random()+'').slice(2);
+            var qs = '';
+            for (var k in params) {
+                qs += '&amp;amp;' + encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+            }
+            var src = 'https://ads.celtra.com/446edc0c/web.js?' + qs;
+            req.src = src;
+            img.parentNode.insertBefore(req, img.nextSibling);
+        })(this);
+    &quot;/&gt;
+&lt;/div&gt;</textarea>
+    </div>
+
+    <form action="build.php" name="params" method="post">
+    <div>
+        testName=<select name="testName">
+            <option value="">-</option>
+        <option  value=GPT-Safeframe>GPT Safeframe</option>
+<option  value=IAB-friendly-iframe-without-container-size>IAB friendly iframe without container size</option>
+<option  value=IAB-friendly-iframe-without-iframe-size>IAB friendly iframe without iframe size</option>
+<option selected="selected" value=IAB-friendly-iframe>IAB friendly iframe</option>
+<option  value=MRAID-VPAID>MRAID VPAID</option>
+<option  value=MRAID>MRAID</option>
+<option  value=VAST>VAST</option>
+<option  value=VPAID>VPAID</option>
+<option  value=blank>blank</option>
+<option  value=display-none>display none</option>
+<option  value=friendly-iframe>friendly iframe</option>
+<option  value=hostile-iframe>hostile iframe</option>
+<option  value=inline>inline</option>
+<option  value=obstructing-element>obstructing element</option>
+<option  value=responsive-banner>responsive banner</option>
+<option  value=visibility-hidden>visibility hidden</option>
+        </select>
+
+        placementPosition=<select name="placementPosition">
+            <option value="-">-</option>
+        <option selected="selected" value="top">top</option>
+<option  value="middle">middle</option>
+<option  value="bottom">bottom</option>
+<option  value="sticky-top">sticky top</option>
+<option  value="sticky-bottom">sticky bottom</option>
+<option  value="float-left">float left</option>
+<option  value="float-right">float right</option>
+<option  value="absolute-top-left">absolute top left</option>
+<option  value="absolute-top">absolute top</option>
+<option  value="absolute-top-right">absolute top right</option>
+<option  value="absolute-left">absolute left</option>
+<option  value="absolute-right">absolute right</option>
+<option  value="absolute-bottom-left">absolute bottom left</option>
+<option  value="absolute-bottom">absolute bottom</option>
+<option  value="absolute-bottom-right">absolute bottom right</option>
+        </select>
+
+        mobileOptimized:
+        <input type="radio" id="mobileOptimizedYesOption" name="mobileOptimized" value="yes"
+            checked        >
+        <label for="mobileOptimizedYesOption">yes</label>
+        <input type="radio" id="mobileOptimizedNoOption" name="mobileOptimized" value="no"
+                    >
+        <label for="mobileOptimizedNoOption">no</label>
+
+        CSP restrictions:
+        <select name="cspRestrictions">
+            <option value="none" selected="selected">none</option><option value="not allowed">not allowed</option><option value="data">data</option><option value="blob">blob</option><option value="data+blob">data+blob</option>        </select>
+
+        
+        Placement size:
+        <input type="text" name="placementWidth" value="300" style="width: 40px" />
+        x
+        <input type="text" name="placementHeight" value="250" style="width: 40px" />
+
+        <div id="iframeAttributesWrapper">
+            Iframe options:
+            <select name="iframeAttributes">
+                <option value="none" selected>none</option><option value="sandbox" >sandbox</option>            </select>
+        </div>
+
+        <div id="sandboxAttributes">
+            Sandbox attributes:
+            <br><input id="allow-forms" type="checkbox" name="sandboxAttributes[]" value="allow-forms" checked><label for="allow-forms">allow-forms</label><br><input id="allow-modals" type="checkbox" name="sandboxAttributes[]" value="allow-modals" checked><label for="allow-modals">allow-modals</label><br><input id="allow-orientation-lock" type="checkbox" name="sandboxAttributes[]" value="allow-orientation-lock" checked><label for="allow-orientation-lock">allow-orientation-lock</label><br><input id="allow-pointer-lock" type="checkbox" name="sandboxAttributes[]" value="allow-pointer-lock" checked><label for="allow-pointer-lock">allow-pointer-lock</label><br><input id="allow-popups" type="checkbox" name="sandboxAttributes[]" value="allow-popups" checked><label for="allow-popups">allow-popups</label><br><input id="allow-popups-to-escape-sandbox" type="checkbox" name="sandboxAttributes[]" value="allow-popups-to-escape-sandbox" checked><label for="allow-popups-to-escape-sandbox">allow-popups-to-escape-sandbox</label><br><input id="allow-presentation" type="checkbox" name="sandboxAttributes[]" value="allow-presentation" checked><label for="allow-presentation">allow-presentation</label><br><input id="allow-same-origin" type="checkbox" name="sandboxAttributes[]" value="allow-same-origin" checked><label for="allow-same-origin">allow-same-origin</label><br><input id="allow-scripts" type="checkbox" name="sandboxAttributes[]" value="allow-scripts" checked><label for="allow-scripts">allow-scripts</label><br><input id="allow-top-navigation" type="checkbox" name="sandboxAttributes[]" value="allow-top-navigation" checked><label for="allow-top-navigation">allow-top-navigation</label><br><input id="allow-top-navigation-by-user-activation" type="checkbox" name="sandboxAttributes[]" value="allow-top-navigation-by-user-activation" checked><label for="allow-top-navigation-by-user-activation">allow-top-navigation-by-user-activation</label>        </div>
+
+        <input name="go" type="button" value="go &gt;&gt;" />
+        <input name="clear" type="button" value="clear" />
+    </div>
+
+    <script>
+        var form = document.querySelector('form[name=params]');
+        document.querySelector('input[type=button][name=clear]').addEventListener('click', function() {
+            form.reset();
+            location.replace(location.protocol + '//' + location.host);
+        });
+        document.querySelector('input[type=button][name=go]').addEventListener('click', function() {
+            var tag = document.querySelector('textarea[name="code"]').value;
+            var xhr = new XMLHttpRequest();
+            var formData = new FormData(form);
+            formData.append('code', btoa(tag));
+
+            xhr.open("POST", form.action);
+            xhr.onload = function () {
+                location.replace(xhr.responseURL); // http://example.com/test
+            };
+            xhr.send(formData);
+        });
+    </script>
+
+    <script>
+
+        function displayOrHideElement(el, display) {
+            el.style.display = display ? 'block' : 'none';
+        }
+
+        function getSelectedPlacement() {
+            var placements = document.querySelector('select[name="testName"]');
+            return placements.options[placements.selectedIndex].value;
+        }
+
+        function toggleIframeAttributes() {
+            var iframeAttributes = document.getElementById('iframeAttributesWrapper');
+            var displayed = getSelectedPlacement().indexOf('iframe') > -1;
+
+            displayOrHideElement(iframeAttributes, displayed);
+        }
+
+        function toggleSandboxAttributes() {
+            var sandboxAttributes = document.getElementById('sandboxAttributes');
+            var selectedIframeOption = document.querySelector('select[name="iframeAttributes"]').value;
+            var displayed = getSelectedPlacement().indexOf('iframe') > -1 && selectedIframeOption === "sandbox";
+
+            displayOrHideElement(sandboxAttributes, displayed);
+        }
+
+        document.querySelector('select[name="testName"]').addEventListener('change', function() {
+            toggleIframeAttributes();
+            toggleSandboxAttributes();
+        });
+
+        document.querySelector('select[name="iframeAttributes"]').addEventListener('change', function() {
+            toggleSandboxAttributes();
+        });
+
+        toggleIframeAttributes();
+        toggleSandboxAttributes();
+
+    </script>
+
+    </form>
+
+<div style="width: 300px; height: 250px; border: 1px solid red; margin: 20px auto 20px auto;"><iframe scrolling="no" width="300px" height="250px" src="minimal-page-creative.php?tag=494c445ca8d331e650b12f955f004f8c&iabfif=1&width=300&height=250&iframeAttributes=none&sandboxAttributes%5B0%5D=allow-forms&sandboxAttributes%5B1%5D=allow-modals&sandboxAttributes%5B2%5D=allow-orientation-lock&sandboxAttributes%5B3%5D=allow-pointer-lock&sandboxAttributes%5B4%5D=allow-popups&sandboxAttributes%5B5%5D=allow-popups-to-escape-sandbox&sandboxAttributes%5B6%5D=allow-presentation&sandboxAttributes%5B7%5D=allow-same-origin&sandboxAttributes%5B8%5D=allow-scripts&sandboxAttributes%5B9%5D=allow-top-navigation&sandboxAttributes%5B10%5D=allow-top-navigation-by-user-activation&_r=112270539" style="border: 1px solid rgba(0,0,0,.5);"></iframe></div><p>Intelligentsia mustache vinyl, Portland pug cred Odd Future Neutra flannel Kickstarter. Beard normcore asymmetrical roof party, meh four loko fixie bespoke literally art party. Swag art party literally kale chips authentic. Meggings flexitarian ethnic single-origin coffee letterpress bitters raw denim DIY, meh 90's scenester. Truffaut Vice Austin pour-over, narwhal tousled selvage. Tousled cardigan DIY, farm-to-table pour-over kale chips seitan single-origin coffee hella. Etsy craft beer skateboard brunch.</p>
+
+<p>Mumblecore cred crucifix cillum, adipisicing duis Marfa magna cardigan Intelligentsia placeat flexitarian iPhone flannel. Veniam pickled bicycle rights accusamus trust fund quinoa semiotics. High Life officia shabby chic trust fund sustainable. Odd Future sint brunch, readymade swag dolor 3 wolf moon tattooed shabby chic distillery. Trust fund delectus salvia, sunt in officia sint Brooklyn. Salvia mustache enim biodiesel. Ethnic aliqua squid, chillwave PBR leggings ennui Blue Bottle Tonx bicycle rights photo.</p>
+
+<p>Intelligentsia ethical banjo quinoa swag. Master cleanse pop-up Carles, blog put a bird on it Marfa artisan you probably haven't heard of them bitters skateboard beard before they sold out salvia swag. Pitchfork Marfa artisan, actually retro lo-fi Brooklyn vinyl viral craft beer Etsy pickled. PBR sriracha narwhal single-origin coffee, literally artisan kitsch chia slow-carb church-key. Twee typewriter 8-bit food truck, direct trade banh mi quinoa authentic. Intelligentsia Austin raw denim Bushwick plaid.</p>
+
+<p>Kitsch meh cred wayfarers pug. Bespoke put a bird on it readymade ethnic, quinoa you probably haven't heard of them tattooed sustainable narwhal ennui kitsch umami pork belly. Letterpress blog bicycle rights scenester YOLO. American Apparel pork belly Etsy, you probably haven't heard of them Thundercats meh butcher forage sartorial pop-up raw denim 8-bit. Odd Future gastropub street art sriracha, swag next level farm-to-table Helvetica before they sold out 90's McSweeney's roof party typewriter distillery.</p>
+
+<p>Intelligentsia mustache vinyl, Portland pug cred Odd Future Neutra flannel Kickstarter. Beard normcore asymmetrical roof party, meh four loko fixie bespoke literally art party. Swag art party literally kale chips authentic. Meggings flexitarian ethnic single-origin coffee letterpress bitters raw denim DIY, meh 90's scenester. Truffaut Vice Austin pour-over, narwhal tousled selvage. Tousled cardigan DIY, farm-to-table pour-over kale chips seitan single-origin coffee hella. Etsy craft beer skateboard brunch.</p>
+
+<p>Mumblecore cred crucifix cillum, adipisicing duis Marfa magna cardigan Intelligentsia placeat flexitarian iPhone flannel. Veniam pickled bicycle rights accusamus trust fund quinoa semiotics. High Life officia shabby chic trust fund sustainable. Odd Future sint brunch, readymade swag dolor 3 wolf moon tattooed shabby chic distillery. Trust fund delectus salvia, sunt in officia sint Brooklyn. Salvia mustache enim biodiesel. Ethnic aliqua squid, chillwave PBR leggings ennui Blue Bottle Tonx bicycle rights photo.</p>
+
+<p>Kitsch meh cred wayfarers pug. Bespoke put a bird on it readymade ethnic, quinoa you probably haven't heard of them tattooed sustainable narwhal ennui kitsch umami pork belly. Letterpress blog bicycle rights scenester YOLO. American Apparel pork belly Etsy, you probably haven't heard of them Thundercats meh butcher forage sartorial pop-up raw denim 8-bit. Odd Future gastropub street art sriracha, swag next level farm-to-table Helvetica before they sold out 90's McSweeney's roof party typewriter distillery.</p>
+
+<p>Pitchfork Thundercats Godard, 3 wolf moon fixie Echo Park four loko 8-bit plaid lo-fi hashtag pug vinyl meh. Fanny pack American Apparel shabby chic Thundercats, cray biodiesel dreamcatcher sriracha Wes Anderson four loko flexitarian leggings. Marfa mumblecore sriracha, disrupt cray street art jean shorts skateboard American Apparel cliche VHS. Messenger bag skateboard DIY cornhole pork belly trust fund deep v. Vice YOLO Shoreditch, polaroid Pinterest umami banjo disrupt vinyl biodiesel Intelligentsia literally.</p>
+
+<p>Kitsch meh cred wayfarers pug. Bespoke put a bird on it readymade ethnic, quinoa you probably haven't heard of them tattooed sustainable narwhal ennui kitsch umami pork belly. Letterpress blog bicycle rights scenester YOLO. American Apparel pork belly Etsy, you probably haven't heard of them Thundercats meh butcher forage sartorial pop-up raw denim 8-bit. Odd Future gastropub street art sriracha, swag next level farm-to-table Helvetica before they sold out 90's McSweeney's roof party typewriter distillery.</p>
+
+<p>Sint enim ullamco, VHS excepteur ut paleo Banksy exercitation High Life gentrify cornhole deep v. Quinoa +1 ad, id exercitation incididunt semiotics before they sold out irony iPhone. Pour-over non nihil, drinking vinegar American Apparel squid veniam deserunt Truffaut craft beer 90's four loko. Cardigan salvia Shoreditch slow-carb disrupt. Drinking vinegar 8-bit Austin DIY brunch. Put a bird on it culpa Portland, nisi delectus 90's single-origin coffee trust fund tattooed lo-fi Vice vegan High Life ullamco.</p>
+
+<p>Intelligentsia mustache vinyl, Portland pug cred Odd Future Neutra flannel Kickstarter. Beard normcore asymmetrical roof party, meh four loko fixie bespoke literally art party. Swag art party literally kale chips authentic. Meggings flexitarian ethnic single-origin coffee letterpress bitters raw denim DIY, meh 90's scenester. Truffaut Vice Austin pour-over, narwhal tousled selvage. Tousled cardigan DIY, farm-to-table pour-over kale chips seitan single-origin coffee hella. Etsy craft beer skateboard brunch.</p>
+
+<p>Mumblecore cred crucifix cillum, adipisicing duis Marfa magna cardigan Intelligentsia placeat flexitarian iPhone flannel. Veniam pickled bicycle rights accusamus trust fund quinoa semiotics. High Life officia shabby chic trust fund sustainable. Odd Future sint brunch, readymade swag dolor 3 wolf moon tattooed shabby chic distillery. Trust fund delectus salvia, sunt in officia sint Brooklyn. Salvia mustache enim biodiesel. Ethnic aliqua squid, chillwave PBR leggings ennui Blue Bottle Tonx bicycle rights photo.</p>
+
+<p>Intelligentsia mustache vinyl, Portland pug cred Odd Future Neutra flannel Kickstarter. Beard normcore asymmetrical roof party, meh four loko fixie bespoke literally art party. Swag art party literally kale chips authentic. Meggings flexitarian ethnic single-origin coffee letterpress bitters raw denim DIY, meh 90's scenester. Truffaut Vice Austin pour-over, narwhal tousled selvage. Tousled cardigan DIY, farm-to-table pour-over kale chips seitan single-origin coffee hella. Etsy craft beer skateboard brunch.</p>
+
+<p>Sint enim ullamco, VHS excepteur ut paleo Banksy exercitation High Life gentrify cornhole deep v. Quinoa +1 ad, id exercitation incididunt semiotics before they sold out irony iPhone. Pour-over non nihil, drinking vinegar American Apparel squid veniam deserunt Truffaut craft beer 90's four loko. Cardigan salvia Shoreditch slow-carb disrupt. Drinking vinegar 8-bit Austin DIY brunch. Put a bird on it culpa Portland, nisi delectus 90's single-origin coffee trust fund tattooed lo-fi Vice vegan High Life ullamco.</p>
+
+<p>Intelligentsia ethical banjo quinoa swag. Master cleanse pop-up Carles, blog put a bird on it Marfa artisan you probably haven't heard of them bitters skateboard beard before they sold out salvia swag. Pitchfork Marfa artisan, actually retro lo-fi Brooklyn vinyl viral craft beer Etsy pickled. PBR sriracha narwhal single-origin coffee, literally artisan kitsch chia slow-carb church-key. Twee typewriter 8-bit food truck, direct trade banh mi quinoa authentic. Intelligentsia Austin raw denim Bushwick plaid.</p>
+
+<p>Intelligentsia mustache vinyl, Portland pug cred Odd Future Neutra flannel Kickstarter. Beard normcore asymmetrical roof party, meh four loko fixie bespoke literally art party. Swag art party literally kale chips authentic. Meggings flexitarian ethnic single-origin coffee letterpress bitters raw denim DIY, meh 90's scenester. Truffaut Vice Austin pour-over, narwhal tousled selvage. Tousled cardigan DIY, farm-to-table pour-over kale chips seitan single-origin coffee hella. Etsy craft beer skateboard brunch.</p>
+
+<p>Intelligentsia ethical banjo quinoa swag. Master cleanse pop-up Carles, blog put a bird on it Marfa artisan you probably haven't heard of them bitters skateboard beard before they sold out salvia swag. Pitchfork Marfa artisan, actually retro lo-fi Brooklyn vinyl viral craft beer Etsy pickled. PBR sriracha narwhal single-origin coffee, literally artisan kitsch chia slow-carb church-key. Twee typewriter 8-bit food truck, direct trade banh mi quinoa authentic. Intelligentsia Austin raw denim Bushwick plaid.</p>
+
+<p>Intelligentsia mustache vinyl, Portland pug cred Odd Future Neutra flannel Kickstarter. Beard normcore asymmetrical roof party, meh four loko fixie bespoke literally art party. Swag art party literally kale chips authentic. Meggings flexitarian ethnic single-origin coffee letterpress bitters raw denim DIY, meh 90's scenester. Truffaut Vice Austin pour-over, narwhal tousled selvage. Tousled cardigan DIY, farm-to-table pour-over kale chips seitan single-origin coffee hella. Etsy craft beer skateboard brunch.</p>
+
+<p>Intelligentsia mustache vinyl, Portland pug cred Odd Future Neutra flannel Kickstarter. Beard normcore asymmetrical roof party, meh four loko fixie bespoke literally art party. Swag art party literally kale chips authentic. Meggings flexitarian ethnic single-origin coffee letterpress bitters raw denim DIY, meh 90's scenester. Truffaut Vice Austin pour-over, narwhal tousled selvage. Tousled cardigan DIY, farm-to-table pour-over kale chips seitan single-origin coffee hella. Etsy craft beer skateboard brunch.</p>
+
+<p>Sint enim ullamco, VHS excepteur ut paleo Banksy exercitation High Life gentrify cornhole deep v. Quinoa +1 ad, id exercitation incididunt semiotics before they sold out irony iPhone. Pour-over non nihil, drinking vinegar American Apparel squid veniam deserunt Truffaut craft beer 90's four loko. Cardigan salvia Shoreditch slow-carb disrupt. Drinking vinegar 8-bit Austin DIY brunch. Put a bird on it culpa Portland, nisi delectus 90's single-origin coffee trust fund tattooed lo-fi Vice vegan High Life ullamco.</p>
+
+
+            <div id="qrcode" style="margin: 20px; padding: 20px; "></div>
+        <script src="qrcode.js"></script>
+        <script type="text/javascript">
+            new QRCode(document.getElementById("qrcode"), document.location.href);
+        </script></body>
+</html>
